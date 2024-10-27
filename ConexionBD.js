@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
+main().catch(e => console.error('Error en la conexión a la base de datos.', e));
+
 const personajeSchema = new Schema({
     nombre: String,
     pais: String,
@@ -12,18 +14,22 @@ const personajeSchema = new Schema({
 
 const personajeModel = mongoose.model('Personaje', personajeSchema);
 
-main().catch(e => console.error('Error en la conexión a la base de datos.', e));
+
 
 async function main() {
     await mongoose.connect("mongodb+srv://espiritudeaire:123@cluster0.lg823yo.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
     console.log('Conexión exitosa');
 
     let personaje = new personajeModel({
-        nombre: 'Simón Bolívar',
+        nombre: 'Simón Bolívar 2',
         pais: 'Venezuela',
         epoca: 'Independencia',
         descripcion: 'Líder militar y político de la independencia latinoamericana.'
     })
     
-    await personaje.save();
+    console.log(await personaje.save());
+    
+
+    console.log('asdfñjkl');
+    
 }
